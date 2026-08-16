@@ -400,91 +400,34 @@ body{font-family:var(--ui);color:var(--cream);-webkit-font-smoothing:antialiased
 @media (max-height:700px){.bigname{font-size:clamp(2.2rem,13vw,3.6rem)}#heroshot{width:min(44vw,180px)}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.15s!important}}
 
-
-/* ==========================================================
-   ULTIMATE CINEMATIC PASS — deliberately non-blocking overlays
-   ========================================================== */
-html,body,#app{min-height:100%;min-height:100dvh}
-.btn{touch-action:manipulation;isolation:isolate;overflow:hidden}
-.btn::before{content:"";position:absolute;inset:-2px;pointer-events:none;background:linear-gradient(110deg,transparent 18%,rgba(255,255,255,.48) 43%,transparent 62%);transform:translateX(-150%);transition:transform .55s ease}
-.btn:active::before{transform:translateX(150%)}
-.next-wrap{pointer-events:none}
-.next-wrap.show{pointer-events:auto}
-#n0{z-index:130}
-#n0 .btn{font-size:clamp(1rem,4.9vw,1.35rem);box-shadow:0 7px 0 var(--red-d),0 18px 36px -10px #000,0 0 0 3px var(--ink),0 0 34px rgba(224,31,38,.28)}
-#s0 .dossier{transition:box-shadow .5s ease,border-color .5s ease,transform .5s var(--ease)}
-#s0:has(#n0.show) .dossier{border-color:rgba(38,208,196,.75);box-shadow:0 30px 60px -24px #000,0 0 32px rgba(38,208,196,.18);transform:translateY(-3px)}
-
-.cinematic{position:fixed;inset:0;z-index:110;opacity:0;visibility:hidden;pointer-events:none!important;background:#02030a;overflow:hidden;transition:opacity .18s ease,visibility .18s}
-.cinematic.on{opacity:1;visibility:visible}
-.cin-grid{position:absolute;inset:-15%;opacity:.16;background-image:linear-gradient(rgba(38,208,196,.25) 1px,transparent 1px),linear-gradient(90deg,rgba(38,208,196,.2) 1px,transparent 1px);background-size:36px 36px;transform:perspective(500px) rotateX(62deg) translateY(18%);animation:cinGrid 2.7s linear infinite}
-@keyframes cinGrid{to{background-position:0 72px,72px 0}}
-.cin-beam{position:absolute;left:-25%;right:-25%;top:50%;height:2px;background:linear-gradient(90deg,transparent,var(--teal),#fff,var(--teal),transparent);box-shadow:0 0 24px var(--teal);transform:scaleX(0);opacity:0}
-.cinematic.on .cin-beam{animation:beam 2.55s var(--ease) forwards}
-@keyframes beam{0%{transform:scaleX(0);opacity:0}15%{opacity:1}45%{transform:scaleX(1)}72%{opacity:.7}100%{transform:scaleX(1);opacity:0}}
-.cin-copy{position:absolute;left:50%;top:50%;width:min(90vw,620px);transform:translate(-50%,-50%);text-align:center;padding:20px}
-.cin-kicker{font-family:var(--mono);font-size:clamp(.62rem,2.6vw,.78rem);letter-spacing:.34em;color:var(--teal);text-transform:uppercase;opacity:.9;margin-bottom:16px}
-.cin-main{font-family:var(--hd);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(2.6rem,14vw,6rem);line-height:.86;color:var(--cream);text-shadow:4px 5px 0 #000,0 0 28px rgba(255,255,255,.12);letter-spacing:.01em}
-.cin-main.red{color:var(--red-l)} .cin-main.yellow{color:var(--yellow)}
-.cin-sub{font-family:var(--mono);font-size:clamp(.65rem,3vw,.9rem);letter-spacing:.22em;text-transform:uppercase;color:rgba(255,246,230,.7);margin-top:18px;min-height:1.4em}
-.cin-copy.punch{animation:cinPunch .42s var(--pop)}
-@keyframes cinPunch{0%{transform:translate(-50%,-50%) scale(.72);filter:blur(7px);opacity:.1}100%{transform:translate(-50%,-50%) scale(1);filter:none;opacity:1}}
-
-.mission-hud{position:fixed;left:10px;top:calc(var(--sat) + 9px);z-index:94;display:flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid rgba(38,208,196,.28);border-radius:10px;background:rgba(5,6,15,.48);backdrop-filter:blur(8px);font-family:var(--mono);font-size:.54rem;letter-spacing:.14em;color:rgba(255,246,230,.78);opacity:0;transform:translateY(-8px);transition:opacity .35s ease,transform .35s ease;pointer-events:none!important;max-width:56vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mission-hud.on{opacity:1;transform:none}.hud-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px var(--teal);animation:hudPulse 1.5s ease-in-out infinite}
-@keyframes hudPulse{50%{opacity:.25;transform:scale(.75)}}
-.letterbox{position:fixed;left:0;right:0;height:0;background:#000;z-index:109;pointer-events:none!important;transition:height .35s ease}.letterbox.top{top:0}.letterbox.bottom{bottom:0}.cinema-bars .letterbox{height:clamp(7px,1.6vh,14px)}
-
-.scene.on::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(120deg,transparent 15%,rgba(255,255,255,.035) 46%,transparent 64%);transform:translateX(-120%);animation:sceneSweep 7s ease-in-out infinite 1.1s}
-@keyframes sceneSweep{0%,55%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
-#s1 .moon{animation:moonBreath 4.5s ease-in-out infinite alternate}@keyframes moonBreath{to{box-shadow:0 0 100px 28px rgba(255,227,155,.42);transform:scale(1.025)}}
-#s2 .sun{animation:sunPulse 4s ease-in-out infinite alternate}@keyframes sunPulse{to{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
-#s3 .lights{animation:stadiumPulse 2.8s ease-in-out infinite alternate}@keyframes stadiumPulse{to{filter:brightness(1.32)}}
-
-.startrow{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px;z-index:45;position:relative}
-.startrow .btn{font-size:clamp(.82rem,3.9vw,1.04rem);padding:.72em 1em}
-.mission-complete{font-family:var(--mono);font-size:clamp(.58rem,2.8vw,.76rem);letter-spacing:.28em;color:var(--lime);border:1px solid rgba(140,224,74,.5);padding:6px 10px;border-radius:8px;background:rgba(5,6,15,.35);margin-top:2px;transform:rotate(-1deg);box-shadow:0 0 22px rgba(140,224,74,.12)}
-.mission-recap{font-family:var(--mono);font-size:clamp(.56rem,2.8vw,.72rem);letter-spacing:.08em;color:rgba(255,246,230,.78);margin-top:1px;max-width:90vw}
-#s6 .fstack{filter:drop-shadow(0 12px 22px rgba(0,0,0,.35))}
-#s6.on .mission-complete{animation:stampIn .65s var(--pop) .7s both}@keyframes stampIn{from{opacity:0;transform:scale(1.7) rotate(-8deg)}to{opacity:1;transform:scale(1) rotate(-1deg)}}
-
-/* Mobile safeguards: important on iPhone Safari / Files preview */
-@media (max-width:480px){
-  #hud{right:8px}.mission-hud{left:8px;max-width:52vw}
-  .next-wrap{bottom:calc(var(--sab) + 14px);padding:0 10px}
-  .next-wrap .btn{max-width:94vw}
-  .bubble{max-height:36vh;overflow:auto}
-}
-@media (max-height:640px){
-  .mission-hud{display:none}.dossier{transform:scale(.93)}
-  .next-wrap{bottom:calc(var(--sab) + 8px)}
-}
+/* ===== DIRECTOR'S CUT: CINEMATIC PASS ===== */
+:root{--cream:#F4F1E8;--yellow:#FFD45A;--red:#D71920;--teal:#64E6DA}
+#grain{opacity:.025}.vig{background:radial-gradient(115% 88% at 50% 42%,transparent 38%,rgba(0,0,0,.82) 100%)}
+.scene{background-color:#03050b}.bubble{font-family:var(--ui);font-weight:650;letter-spacing:.005em;background:rgba(7,10,20,.88);color:#f8f5ed;border:1px solid rgba(255,255,255,.22);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.55),inset 0 1px rgba(255,255,255,.08);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);text-shadow:0 1px 8px #000}
+.bubble::after{border-top-color:rgba(255,255,255,.22)}.bubble::before{border-top-color:rgba(7,10,20,.92)}
+.bubble.up::after{border-bottom-color:rgba(255,255,255,.22)}.bubble.up::before{border-bottom-color:rgba(7,10,20,.92)}
+.btn{border-radius:11px;letter-spacing:.08em;box-shadow:0 5px 0 #a77709,0 18px 38px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.18)}
+#hud button,#hud select{background:rgba(3,5,12,.72);border:1px solid rgba(255,255,255,.18)}
+.storycard{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;visibility:hidden;background:radial-gradient(circle at 50% 42%,rgba(18,31,72,.88),#020309 68%);transition:opacity .22s ease,visibility .22s}
+.storycard.on{opacity:1;visibility:visible}.storycard:before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 38%,rgba(93,142,255,.08) 50%,transparent 62%);animation:scscan 1.7s ease-in-out infinite}
+@keyframes scscan{from{transform:translateX(-45%)}to{transform:translateX(45%)}}
+.storyinner{position:relative;width:min(88vw,520px);padding:30px 22px;text-align:center}.storyeyebrow{font:600 .64rem var(--mono);letter-spacing:.34em;color:var(--teal);text-transform:uppercase;margin-bottom:14px}.storymain{font:800 italic clamp(2rem,11vw,4.2rem)/.9 var(--hd);text-transform:uppercase;color:var(--cream);text-shadow:0 5px 28px #000}.storymain em{font-style:inherit;color:var(--yellow)}.storysub{margin:16px auto 0;max-width:390px;font:600 clamp(.86rem,3.7vw,1.05rem)/1.45 var(--ui);color:rgba(244,241,232,.78)}
+#s2:after{content:"66,000,000 YEARS AGO";position:absolute;left:14px;bottom:14px;z-index:35;font:600 .55rem var(--mono);letter-spacing:.2em;color:rgba(255,255,255,.5)}
+#s3:after{content:"TEMPORAL LOCK // PRESENT DAY";position:absolute;left:14px;bottom:14px;z-index:30;font:600 .55rem var(--mono);letter-spacing:.18em;color:rgba(255,255,255,.48)}
 
 </style>
 </head>
 <body>
 <div id="app">
-  <div id="cinematic" class="cinematic" aria-hidden="true">
-    <div class="cin-grid"></div>
-    <div class="cin-beam"></div>
-    <div class="cin-copy">
-      <div class="cin-kicker" id="cinKicker">PRIORITY TRANSMISSION</div>
-      <div class="cin-main" id="cinMain"></div>
-      <div class="cin-sub" id="cinSub"></div>
-    </div>
-  </div>
-  <div id="missionHud" class="mission-hud" aria-hidden="true">
-    <span class="hud-dot"></span><span id="missionHudText">MISSION // STANDBY</span>
-  </div>
-  <div class="letterbox top"></div><div class="letterbox bottom"></div>
   <canvas id="fx"></canvas>
   <div id="flash"></div>
   <div id="grain"></div>
   <div class="wipe" id="wipe"><i></i><b id="wipeTxt"></b></div>
+  <div id="storycard" class="storycard" aria-hidden="true"><div class="storyinner"><div class="storyeyebrow" id="storyEye">MISSION UPDATE</div><div class="storymain" id="storyMain"></div><div class="storysub" id="storySub"></div></div></div>
+
 
   <div id="hud">
-    <select id="voiceSel" aria-label="Choose voice"></select>
-    <button id="voiceBtn" class="off" aria-label="Voice">VOICE</button>
+    <select id="voiceSel" aria-label="Choose voice"></select>\n    <button id="voiceBtn" class="off" aria-label="Voice">VOICE</button>
     <button id="muteBtn" aria-label="Sound">
       <svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="wave" d="M16.5 8.5a5 5 0 0 1 0 7"/></svg>
     </button>
@@ -507,7 +450,7 @@ html,body,#app{min-height:100%;min-height:100dvh}
       <p class="kicker" id="loadTxt" style="margin-top:10px;text-align:left">Decrypting…</p>
     </div>
     <div style="margin-top:18px"><span class="stamp">Top secret</span></div>
-    <div class="next-wrap" id="n0"><button class="btn r pulse">BEGIN BIRTHDAY MISSION →</button></div>
+    <div class="next-wrap" id="n0"><button class="btn r pulse">Open the file →</button></div>
     <div class="vig"></div>
   </section>
 
@@ -518,7 +461,7 @@ html,body,#app{min-height:100%;min-height:100dvh}
     <div class="swing swingby" id="swingBy"><div class="web"></div><div class="who"></div></div>
     <div id="hang"><div class="web"></div><div class="who"></div></div>
     <div class="bubble up" id="b1" style="bottom:17%"></div>
-    <div class="next-wrap" id="n1"><button class="btn pulse">FOLLOW THE SIGNAL →</button></div>
+    <div class="next-wrap" id="n1"><button class="btn pulse">Follow him →</button></div>
     <div class="vig"></div>
   </section>
 
@@ -539,7 +482,7 @@ html,body,#app{min-height:100%;min-height:100dvh}
     <div class="canopy" id="canopy"></div>
     <div class="warn" id="warn">⚠ Warning · apex predator</div>
     <div class="bubble" id="b2" style="top:10%"></div>
-    <div class="next-wrap" id="n2"><button class="btn pulse">ESCAPE THE VALLEY →</button></div>
+    <div class="next-wrap" id="n2"><button class="btn pulse">Keep going →</button></div>
     <div class="vig"></div>
   </section>
 
@@ -549,7 +492,7 @@ html,body,#app{min-height:100%;min-height:100dvh}
     <div class="flyhud">Score <b id="flyScore">0</b></div>
     <div class="flytip" id="flyTip">Tap to flap!</div>
     <div class="bubble" id="bf" style="top:9%"></div>
-    <div class="next-wrap" id="nf"><button class="btn pulse">DELIVER THE CAKE →</button></div>
+    <div class="next-wrap" id="nf"><button class="btn pulse">Onwards →</button></div>
     <div class="vig"></div>
   </section>
 
@@ -567,7 +510,7 @@ html,body,#app{min-height:100%;min-height:100dvh}
     <div class="prompt" id="prompt">Tap to aim</div>
     <div id="tapzone"></div>
     <div class="bubble" id="b3" style="top:9%"></div>
-    <div class="next-wrap" id="n3"><button class="btn pulse">UNLOCK THE VAULT →</button></div>
+    <div class="next-wrap" id="n3"><button class="btn pulse">What's next? →</button></div>
     <div class="vig"></div>
   </section>
 
@@ -576,7 +519,7 @@ html,body,#app{min-height:100%;min-height:100dvh}
     <h2 class="hd md yellow montage-title" id="montTitle">8 years of legend</h2>
     <div class="montage" id="montage"></div>
     <p class="counter" id="montCount"></p>
-    <div class="next-wrap" id="n4"><button class="btn pulse">FINAL CHALLENGE →</button></div>
+    <div class="next-wrap" id="n4"><button class="btn pulse">Cake time →</button></div>
     <div class="vig"></div>
   </section>
 
@@ -588,12 +531,9 @@ html,body,#app{min-height:100%;min-height:100dvh}
     <p class="candlecount" id="candleCount"><b>8</b> candles left</p>
     <p class="timer" id="cakeTimer">0.0s</p>
     <p class="miclive" id="micLive"><i></i>Listening…</p>
-    <div class="startrow" id="startrow">
-        <button class="btn r" id="micStart" type="button">🎤 Blow for real</button>
-        <button class="btn" id="tapStart" type="button">⚡ Tap challenge</button>
-      </div>
+    <div class="startrow" id="startrow"></div>
     <div class="wish hd lg yellow" id="wish">Make a wish!</div>
-    <div class="next-wrap" id="n5"><button class="btn pulse">COMPLETE THE MISSION →</button></div>
+    <div class="next-wrap" id="n5"><button class="btn pulse">Wish made →</button></div>
     <div class="vig"></div>
   </section>
 
@@ -606,11 +546,9 @@ html,body,#app{min-height:100%;min-height:100dvh}
       <div class="bigname" id="bigAge">8th</div>
       <div class="bigname" id="bigName">REUBEN</div>
       <p class="from" id="fromLine"></p>
-      <div class="mission-complete" id="missionComplete">MISSION COMPLETE</div>
-      <div class="mission-recap" id="missionRecap"></div>
       <div class="finbtns">
         <button class="btn" id="videoBtn" style="display:none">▶ Video message</button>
-        <button class="btn r" id="replayBtn">REPLAY MISSION ↺</button>
+        <button class="btn r" id="replayBtn">Again ↺</button>
       </div>
     </div>
     <img id="heroshot" alt="">
@@ -626,7 +564,7 @@ const NAME  = "Reuben";
 const AGE   = 8;
 const FROM  = "Uncle James & Auntie Georgie";
 const VIDEO_URL = "";              // optional link to a video message
-const VOICE_DEFAULT = false;       // true = phone reads the lines aloud (robotic)
+const VOICE_DEFAULT = true;       // true = phone reads the lines aloud (robotic)
 const CAPTIONS = [                 // captions under the photo panels, in order
   "Mostly ice lolly",
   "Bouncy castle champion",
@@ -945,7 +883,7 @@ function scoreVoice(v){
   if(/premium|enhanced|neural|natural/.test(n)) sc+=60;        // downloaded high-quality voices
   if(/siri/.test(n)) sc+=50;
   if(/^en-gb/i.test(v.lang)) sc+=14; else if(/^en/i.test(v.lang)) sc+=8; else sc-=40;
-  if(/daniel|arthur|oliver|george|ryan|alex|nathan|jamie/.test(n)) sc+=10;
+  if(/daniel|arthur|oliver|george|ryan|alex|nathan|jamie/.test(n)) sc+=24;
   if(/compact|eloquence|novelty|whisper|bells|bad news|bubbles|jester|organ|trinoids|zarvox|albert/.test(n)) sc-=70;
   return sc;
 }
@@ -986,7 +924,7 @@ function say(t,done){
       const u=new SpeechSynthesisUtterance(p);
       if(voice)u.voice=voice;
       const punchy=/[!?]$/.test(p);
-      u.rate=punchy?1.0:.93; u.pitch=punchy?1.06:.97; u.volume=1;
+      u.rate=punchy?.92:.84; u.pitch=punchy?.88:.82; u.volume=1;
       u.onend=()=>setTimeout(next,150);
       u.onerror=()=>setTimeout(next,150);
       speechSynthesis.speak(u);
@@ -1048,6 +986,11 @@ function bubble(el,text,o={}){
     if(i>=text.length){clearInterval(typer); typed=true; ready();} },sp);
 }
 const hide=el=>el.classList.remove("show");
+function storyBeat(eye,main,sub,done,dur=3000){
+  const c=$("#storycard"); $("#storyEye").textContent=eye; $("#storyMain").innerHTML=main; $("#storySub").textContent=sub;
+  c.classList.add("on"); flash(); tone(72,1.8,.06,0,"sawtooth",42); noise(1.5,.025,"lowpass",280,.8);
+  setTimeout(()=>{c.classList.remove("on");setTimeout(()=>done&&done(),240);},dur);
+}
 
 /* ================= scenes ================= */
 const IDS=["s0","s1","s2","sfly","s3","s4","s5","s6"]; let cur="s0"; const enter={};
@@ -1055,29 +998,9 @@ function go(id,title){
   const w=$("#wipe"); $("#wipeTxt").textContent=title||"";
   w.classList.remove("go"); void w.offsetWidth; w.classList.add("go");
   if("speechSynthesis" in window)speechSynthesis.cancel();
-  setTimeout(()=>{ IDS.forEach(x=>$("#"+x).classList.toggle("on",x===id)); cur=id; setMissionHud(id); if(enter[id])enter[id](); },420);
+  setTimeout(()=>{ IDS.forEach(x=>$("#"+x).classList.toggle("on",x===id)); cur=id; if(enter[id])enter[id](); },420);
 }
 function nb(id,fn){$("#"+id).querySelector("button").addEventListener("click",()=>{sfx.ui();buzz(10);$("#"+id).classList.remove("show");fn();});}
-
-function missionLabel(id){return ({s1:"01 // NIGHT WATCH",s2:"02 // LOST WORLD",sfly:"03 // AIR DELIVERY",s3:"04 // PENALTY PROTOCOL",s4:"05 // ORIGIN STORY",s5:"06 // CANDLE CORE",s6:"MISSION // COMPLETE"})[id]||"MISSION // STANDBY";}
-function setMissionHud(id){
-  const h=$("#missionHud"),t=$("#missionHudText"); if(!h||!t)return;
-  t.textContent=missionLabel(id); h.classList.toggle("on",id!=="s0");
-}
-function cinBeat(main,sub="",klass=""){
-  const c=$("#cinematic"),copy=c.querySelector(".cin-copy"),m=$("#cinMain"),ss=$("#cinSub");
-  m.className="cin-main"+(klass?" "+klass:""); m.textContent=main; ss.textContent=sub;
-  copy.classList.remove("punch"); void copy.offsetWidth; copy.classList.add("punch");
-  flash(klass==="red");
-}
-function launchBrief(done){
-  const c=$("#cinematic"); document.body.classList.add("cinema-bars"); c.classList.add("on");
-  tone(82,2.4,.08,0,"sawtooth",48); noise(2.2,.035,"lowpass",360,.7,0,90);
-  cinBeat("PRIORITY ALERT","ONE BIRTHDAY HERO REQUIRED","red");
-  setTimeout(()=>{sfx.ui();cinBeat("SUBJECT FOUND",`${NAME.toUpperCase()} // LEVEL ${AGE} CLEARANCE`,"");},820);
-  setTimeout(()=>{sfx.chime();cinBeat("MISSION: BIRTHDAY","STATUS // UNSTOPPABLE","yellow");burst(innerWidth/2,innerHeight/2,28,7);},1640);
-  setTimeout(()=>{c.classList.remove("on");setTimeout(()=>document.body.classList.remove("cinema-bars"),380); if(done)done();},2550);
-}
 
 /* fill in content */
 $("#dName").textContent=NAME.toUpperCase();
@@ -1155,14 +1078,14 @@ $("#voiceBtn").classList.toggle("off",!voiceOn);
 /* ---- 0 ---- */
 (()=>{
   const bar=$("#loadBar"), txt=$("#loadTxt");
-  const steps=["Decrypting birthday protocol…","Scanning hero signature…",`Identity confirmed: ${NAME.toUpperCase()}`,"MISSION READY"];
+  const steps=["Decrypting…","Matching face…","Identity confirmed","Mission unlocked"];
   let p=0,i=0;
   const t=setInterval(()=>{ p+=Math.random()*16+8; if(p>100)p=100;
     bar.style.width=p+"%"; txt.textContent=steps[Math.min(steps.length-1,Math.floor(p/26))];
     tone(500+p*6,.05,.03,0,"square");
     if(p>=100){clearInterval(t); sfx.boot(); $("#n0").classList.add("show");} },420);
 })();
-nb("n0",()=>{audio(); if("speechSynthesis" in window){try{speechSynthesis.speak(new SpeechSynthesisUtterance(" "));}catch(e){}} launchBrief(()=>go("s1","Mission 01 · Night watch"));});
+nb("n0",()=>{audio(); if("speechSynthesis" in window){try{speechSynthesis.speak(new SpeechSynthesisUtterance(" "));}catch(e){}} go("s1","Chapter 1 · The city");});
 
 /* ---- 1 ---- */
 enter.s1=()=>{
@@ -1171,12 +1094,12 @@ enter.s1=()=>{
   setTimeout(()=>{by.classList.add("go");sfx.thwip();},220);
   setTimeout(()=>sfx.thwip(),1400);
   setTimeout(()=>{hg.classList.add("down");sfx.thwip();buzz(12);},2700);
-  setTimeout(()=>bubble(b1,`Okay... hold on. Is that ${NAME}?`,{
-    then:()=>bubble(b1,`${AGE} today? That is not just a birthday. That is an origin story.`,{
-      then:()=>bubble(b1,"I picked up a birthday signal that should not exist in this universe. You are coming with me.",{
+  setTimeout(()=>bubble(b1,`There you are. ${NAME}. I have been looking everywhere for you.`,{
+    then:()=>bubble(b1,`${AGE} today. Good. Then the signal was right. Your birthday has caused a tiny problem with time.`,{
+      then:()=>bubble(b1,"A temporal birthday core has shattered across history. If we do not recover every piece before the candles are lit, your birthday disappears from the timeline. You are coming with me.",{
         then:()=>$("#n1").classList.add("show"),wait:450})})}),3650);
 };
-nb("n1",()=>{hide($("#b1"));go("s2","Mission 02 · The lost world");});
+nb("n1",()=>{hide($("#b1"));storyBeat("TEMPORAL JUMP ARMED","66 MILLION <em>YEARS</em>","Fragment 01 detected in the Cretaceous period.",()=>go("s2","Chapter 2 · 66 million years ago"),2900);});
 
 /* ---- 2 ---- */
 enter.s2=()=>{
@@ -1187,10 +1110,10 @@ enter.s2=()=>{
   $("#pack").innerHTML=""; void d.offsetWidth;
 
   const V=voiceOn?1.5:1;
-  bubble(b2,`Uh... ${NAME}? Tiny problem. We took a wrong turn. About 66 million years wrong.`);
-  setTimeout(()=>bubble(b2,"Stay close. If anything asks, we are definitely not carrying birthday cake."),3400*V);
+  bubble(b2,`First fragment located. Bad news: it landed 66 million years ago. Worse news: something very large is standing on it.`);
+  setTimeout(()=>bubble(b2,"We get the fragment, reopen the portal, and get home. Quietly. Absolutely no dinosaurs chasing us. That is the plan."),3400*V);
   setTimeout(()=>{hide(b2);raptorDash();shake();buzz(18);},6600*V);
-  setTimeout(()=>bubble(b2,"Okay. Those were the small ones."),8600*V);
+  setTimeout(()=>bubble(b2,"Those were the small ones. I would like to officially revise the plan."),8600*V);
   [11200,11850,12500].forEach((t,i)=>setTimeout(()=>{sfx.stomp();shake();buzz(28);
     const m=document.createElement("div"); m.className="stompmark on";
     m.style.left=(20+i*24)+"%"; $("#s2").appendChild(m);},t*V));
@@ -1202,10 +1125,10 @@ enter.s2=()=>{
     burst(W*.55,H*.4,40,9,["#8CE04A","#FFF6E6","#FFC93C"]);},17300*V);
   setTimeout(()=>d.classList.remove("roar"),19200*V);
   setTimeout(()=>{d.classList.add("hat-on");sfx.chime();
-    bubble(b2,`False alarm. He does not want to eat us. He heard there was cake. Happy birthday, ${NAME}.`,
+    bubble(b2,`Wait... the fragment is in his party hat. He is not attacking — he is guarding it. Fragment one recovered. And apparently we have invited a T-Rex to your birthday.`,
       {then:()=>$("#n2").classList.add("show"),wait:400});},19500*V);
 };
-nb("n2",()=>{hide($("#b2"));go("sfly","Mission 03 · Air delivery");});
+nb("n2",()=>{hide($("#b2"));storyBeat("FRAGMENT 01 // RECOVERED","PORTAL <em>UNSTABLE</em>","The jump home has scattered one very important piece of cargo: the birthday cake.",()=>go("sfly","Chapter 3 · Air recovery"),3000);});
 
 /* ---- special delivery: flap the presents to Reuben ---- */
 const svgImg=v=>{const i=new Image(); i.src="data:image/svg+xml;charset=utf8,"+encodeURIComponent(v); return i;};
@@ -1230,7 +1153,7 @@ enter.sfly=()=>{
   flyResize(); $("#nf").classList.remove("show"); hide($("#bf"));
   flyReset(); $("#flyTip").classList.remove("hide");
   $("#flyTip").textContent="Tap to flap!";
-  bubble($("#bf"),`Co-pilot needed! Get the birthday cake through the canyon. Tap to flap — and do not drop it!`,{wait:2200,
+  bubble($("#bf"),`He's carrying your birthday cake — tap to keep him flying!`,{wait:2200,
     then:()=>hide($("#bf"))});
   cancelAnimationFrame(F.raf); F.raf=requestAnimationFrame(flyLoop);
 };
@@ -1372,10 +1295,10 @@ function flyCrash(){
 function flyWin(){
   F.state="won"; $("#flyTip").classList.add("hide");
   sfx.fanfare(); rain(90); burst(F.w*.5,F.h*.5,60,10); buzz([25,50,25,50]);
-  bubble($("#bf"),`DELIVERY COMPLETE. Birthday cake secured for ${NAME}. That was elite flying.`,
+  bubble($("#bf"),`Cake secured. And fragment two was hidden inside the delivery beacon. Two recovered. One remains — back home.`,
     {then:()=>$("#nf").classList.add("show"),wait:400});
 }
-nb("nf",()=>{hide($("#bf"));cancelAnimationFrame(F.raf);go("s3","Mission 04 · Penalty protocol");});
+nb("nf",()=>{hide($("#bf"));cancelAnimationFrame(F.raf);storyBeat("FRAGMENT 02 // RECOVERED","RETURNING <em>HOME</em>","One final temporal lock remains. It has built itself from Reuben’s strongest signal: football.",()=>go("s3","Chapter 4 · The final lock"),3200);});
 
 /* ---- 3: penalties with aim + power ---- */
 const G={state:"idle",shot:0,goals:0,aimX:0,dir:1,power:0,pdir:1,raf:null,speed:1};
@@ -1387,7 +1310,7 @@ enter.s3=()=>{
   $("#reticle").className=""; $("#powerbox").className="powerbox";
   hide($("#b3")); $("#n3").classList.remove("show");
   setTimeout(()=>sfx.whistle(),350);
-  setTimeout(()=>bubble($("#b3"),"Final security check: five penalties. Tap once to lock your aim, then tap again for power.",
+  setTimeout(()=>bubble($("#b3"),"We are back — but the final fragment is locked behind a challenge built from your own memories. Of course it chose football. Five penalties. Show it who you are.",
     {then:()=>{hide($("#b3"));beginShot();},wait:1500}),600);
 };
 function goalBox(){const r=$(".goal").getBoundingClientRect();return r;}
@@ -1465,13 +1388,13 @@ function endGame(){
   G.state="done"; $("#prompt").style.display="none";
   const g=G.goals;
   const line = g>=5 ? `FIVE OUT OF FIVE. ${NAME.toUpperCase()}, that is a world record.`
-             : g>=3 ? `${g} out of 5! Absolute striker. The crowd is going wild.`
-             : g>=1 ? `${g} out of 5 — and that keeper is world class. Nice work.`
-                    : "Tough keeper. Next season is yours.";
+             : g>=3 ? `${g} out of 5. Identity confirmed. The final fragment is unlocking...`
+             : g>=1 ? `${g} out of 5. That is enough. Identity confirmed. The final fragment is unlocking...`
+                    : "That keeper was ridiculous. But the system has what it needs: courage, persistence, and you. The final fragment is unlocking...";
   sfx.whistle(); if(g>=3){rain(60);sfx.crowd(true);}
   setTimeout(()=>bubble($("#b3"),line,{then:()=>$("#n3").classList.add("show"),wait:400}),700);
 }
-nb("n3",()=>{hide($("#b3"));cancelAnimationFrame(G.raf);go("s4","Mission 05 · The origin story");});
+nb("n3",()=>{hide($("#b3"));cancelAnimationFrame(G.raf);storyBeat("ALL FRAGMENTS // RECOVERED","BUT WHO IS <em>REUBEN?</em>","To repair the timeline, the core needs eight years of memories — the moments that made the hero.",()=>go("s4","Chapter 5 · The identity archive"),3300);});
 
 /* ---- 4: montage ---- */
 enter.s4=()=>{
@@ -1492,7 +1415,7 @@ enter.s4=()=>{
   });
   setTimeout(()=>{$("#n4").classList.add("show");sfx.chime();},420+IMGS.panels.length*520+400);
 };
-nb("n4",()=>go("s5","Mission 06 · Candle core"));
+nb("n4",()=>storyBeat("IDENTITY VERIFIED",`${AGE} YEARS <em>LOCKED IN</em>`,"The timeline is repaired. One thing remains: power the core with eight birthday wishes.",()=>go("s5","Chapter 6 · The candle core"),3000));
 
 /* ---- 5: the candle challenge ---- */
 const C={mode:null,left:AGE,t0:0,raf:null,timer:null,meter:0,stream:null,an:null,base:0,done:false};
@@ -1509,10 +1432,9 @@ enter.s5=()=>{
   $("#wish").classList.remove("on"); $("#n5").classList.remove("show");
   $("#meterbox").classList.remove("on"); $("#micLive").classList.remove("on");
   $("#meterFill").style.width="0%"; $("#cakeTimer").textContent="0.0s";
-  $("#startrow").style.display="flex";
+  $("#startrow").style.display="none";
   setCount();
-  C.mode="choose";
-  $("#cakeTitle").textContent="Choose your final challenge";
+  startTap(false);
 };
 function startTimer(){
   if(C.t0)return;
@@ -1588,10 +1510,10 @@ function rescueTimer(){
 }
 function stopMic(){ if(C.stream){C.stream.getTracks().forEach(t=>t.stop());C.stream=null;} C.an=null; }
 /* --- tap mode --- */
-function startTap(fallback=false){
+function startTap(){
   $("#startrow").style.display="none";
   C.mode="tap"; C.meter=0; C.t0=0;
-  $("#cakeTitle").textContent=fallback?"Mic unavailable — TAP TO POWER THE BLOW!":"Tap as fast as you can!";
+  $("#cakeTitle").textContent="Tap as fast as you can!";
   $("#meterbox").classList.add("on");
   tapLoop();
 }
@@ -1602,8 +1524,6 @@ function tapLoop(){
   $("#cake").classList.toggle("blowing",C.meter>28);
   C.raf=requestAnimationFrame(tapLoop);
 }
-$("#micStart").addEventListener("click",e=>{e.preventDefault();e.stopPropagation();audio();sfx.ui();startMic();});
-$("#tapStart").addEventListener("click",e=>{e.preventDefault();e.stopPropagation();audio();sfx.ui();startTap(false);});
 $("#s5").addEventListener("click",e=>{
   if(C.mode!=="tap"||C.done)return;
   if(e.target.closest("button"))return;
@@ -1612,21 +1532,19 @@ $("#s5").addEventListener("click",e=>{
   if(C.meter>=100){C.meter=14;blowOne();}
 });
 
-nb("n5",()=>go("s6","MISSION COMPLETE"));
+nb("n5",()=>storyBeat("TEMPORAL CORE // 100%","TIMELINE <em>RESTORED</em>","Dinosaurs: survived. Cake: recovered. Football lock: broken. Birthday: saved.",()=>go("s6","MISSION COMPLETE"),3200));
 
 /* ---- 6: finale ---- */
 enter.s6=()=>{
   const by=$("#swingBy2"); by.classList.remove("go"); void by.offsetWidth;
-  const recap=$("#missionRecap"); if(recap)recap.textContent=`AIR DELIVERY ${Math.min(F.passed,FLY_TARGET)}/${FLY_TARGET}  ·  PENALTIES ${G.goals}/5  ·  CAKE SECURED`;
-  const mc=$("#missionComplete"); if(mc)mc.textContent=`MISSION COMPLETE // AGENT ${NAME.toUpperCase()}`;
   setTimeout(()=>{by.classList.add("go");sfx.thwip();},400);
   sfx.fanfare(); rain(170); burst(innerWidth*.5,innerHeight*.42,74,11); buzz([30,50,30,50,70]);
   let n=0; const t=setInterval(()=>{firework(Math.random()*innerWidth,innerHeight*(.14+Math.random()*.3));
     if(++n>8)clearInterval(t);},600);
-  setTimeout(()=>say(`Mission complete. Happy ${AGE}th birthday, ${NAME}. Have the best day ever.`),1400);
+  setTimeout(()=>say(`Happy birthday ${NAME}. Have the best day ever.`),1400);
   setTimeout(()=>rain(120),3400);
 };
-$("#replayBtn").addEventListener("click",()=>{sfx.ui();setMissionHud("s0");go("s0");});
+$("#replayBtn").addEventListener("click",()=>{sfx.ui();go("s0");});
 if(VIDEO_URL){const v=$("#videoBtn");v.style.display="inline-block";
   v.addEventListener("click",()=>{sfx.ui();window.open(VIDEO_URL,"_blank","noopener");});}
 
@@ -1635,9 +1553,6 @@ document.addEventListener("click",e=>{
   if(cur==="s0"||cur==="s3"||cur==="sfly"||reduce)return;
   if(e.target.closest("button")||e.target.closest("#cake")||e.target.closest("#hud"))return;
   sfx.thwip(); burst(e.clientX,e.clientY,9,4,["#FFF6E6","#E01F26","#1B47C4"]);
-});
-document.querySelectorAll("button").forEach(b=>{
-  b.addEventListener("touchstart",()=>{}, {passive:true});
 });
 document.addEventListener("gesturestart",e=>e.preventDefault());
 </script>
