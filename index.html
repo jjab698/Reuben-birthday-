@@ -531,11 +531,66 @@ mix-blend-mode:screen;animation:lensdrift 8s ease-in-out infinite alternate}
 
 #heroGuide.talking .hg-body{animation:hgtalk .28s ease-in-out 2 alternate}
 @keyframes hgtalk{to{transform:translateY(-5px) rotate(-2deg) scale(1.025)}}
+
+/* ===== V9: PREMIERE MAX FX ===== */
+#timewarp{position:fixed;inset:0;z-index:116;pointer-events:none;opacity:0;visibility:hidden;overflow:hidden;background:#01020a}
+#timewarp.on{opacity:1;visibility:visible;animation:warpFade 1.55s ease both}
+#timewarp .warpCore{position:absolute;left:50%;top:50%;width:12vmin;height:12vmin;border-radius:50%;transform:translate(-50%,-50%);
+ background:radial-gradient(circle,#fff 0 8%,#79e6ff 9% 18%,#2855ff 25%,#7115a8 42%,transparent 67%);
+ box-shadow:0 0 45px #8beaff,0 0 120px #3156ff,0 0 220px rgba(141,35,255,.85);animation:warpCore 1.55s cubic-bezier(.2,.7,.15,1) both}
+#timewarp .warpRing{position:absolute;left:50%;top:50%;width:18vmin;height:18vmin;border:2px solid rgba(190,240,255,.9);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 18px #fff,inset 0 0 25px #55baff;animation:ringBlast 1.55s ease-out both}
+#timewarp .warpStreaks{position:absolute;inset:-40%;background:repeating-conic-gradient(from 0deg,rgba(255,255,255,.0) 0 2deg,rgba(126,207,255,.48) 2.2deg 2.7deg,rgba(255,255,255,0) 3deg 8deg);filter:blur(1px);animation:warpSpin .8s linear infinite}
+@keyframes warpFade{0%{opacity:0}10%,78%{opacity:1}100%{opacity:0}}
+@keyframes warpCore{0%{transform:translate(-50%,-50%) scale(.05)}55%{transform:translate(-50%,-50%) scale(2.1)}100%{transform:translate(-50%,-50%) scale(11)}}
+@keyframes ringBlast{0%{opacity:0;transform:translate(-50%,-50%) scale(.1)}25%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(12)}}
+@keyframes warpSpin{to{transform:rotate(360deg) scale(1.15)}}
+
+#shockwave{position:fixed;left:50%;top:50%;width:20px;height:20px;border:4px solid rgba(255,255,255,.95);border-radius:50%;z-index:114;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.1)}
+#shockwave.go{animation:shock 1s ease-out}
+@keyframes shock{0%{opacity:1;transform:translate(-50%,-50%) scale(.1);box-shadow:0 0 30px #fff}100%{opacity:0;transform:translate(-50%,-50%) scale(45);box-shadow:0 0 100px #55baff}}
+
+.webCurtain{position:fixed;inset:0;z-index:66;pointer-events:none;opacity:0;background:
+ radial-gradient(circle at 0 0,transparent 0 21%,rgba(255,255,255,.18) 21.2% 21.5%,transparent 21.7% 29%,rgba(255,255,255,.11) 29.2% 29.5%,transparent 29.7%),
+ repeating-conic-gradient(from 15deg at 0 0,transparent 0 14deg,rgba(220,240,255,.12) 14.3deg 14.9deg,transparent 15.2deg 30deg);
+ transform-origin:0 0}
+.webCurtain.go{animation:webCurtain .9s cubic-bezier(.2,.75,.25,1)}
+@keyframes webCurtain{0%{opacity:0;transform:scale(.15) rotate(-20deg)}35%{opacity:.95}100%{opacity:0;transform:scale(3.2) rotate(10deg)}}
+
+#heroGuide.flyby{animation:heroFlyby 1.45s cubic-bezier(.25,.1,.55,1) both!important;opacity:1!important}
+@keyframes heroFlyby{
+ 0%{left:-35vw;top:8vh;transform:rotate(-42deg) scale(.62)}
+ 45%{left:43vw;top:31vh;transform:rotate(17deg) scale(1.18)}
+ 100%{left:110vw;top:4vh;transform:rotate(55deg) scale(.67)}
+}
+#heroGuide.perched{opacity:1!important;transform:scale(1.07)}
+#heroGuide.perched:before{content:"";position:absolute;left:47%;top:-42vh;width:2px;height:44vh;background:linear-gradient(#fff,rgba(255,255,255,.25));box-shadow:0 0 8px rgba(255,255,255,.7)}
+
+#s2.trexImpact{animation:trexPush .8s cubic-bezier(.2,.7,.25,1)}
+@keyframes trexPush{0%{transform:scale(1)}28%{transform:scale(1.035)}46%{transform:scale(1.018)}100%{transform:scale(1)}}
+#s3 .lights:after{content:"";position:absolute;inset:-20%;background:conic-gradient(from 190deg at 50% -20%,transparent 0 16%,rgba(255,255,255,.16) 18% 21%,transparent 23% 47%,rgba(255,255,255,.12) 49% 52%,transparent 54%);animation:stadiumSweep 5s ease-in-out infinite alternate}
+@keyframes stadiumSweep{to{transform:translateX(12vw) rotate(5deg)}}
+#s6 .rays{opacity:.34;filter:blur(.2px) saturate(1.3)}
+#s6:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 70%,rgba(255,200,80,.25),transparent 34%),radial-gradient(circle at 20% 25%,rgba(80,150,255,.18),transparent 28%);mix-blend-mode:screen}
+
+.bubble.syncing{min-height:64px;display:flex;align-items:center;justify-content:center}
+.bubble .spoken{display:block;animation:spokenIn .18s ease-out}
+@keyframes spokenIn{from{opacity:.15;transform:translateY(5px);filter:blur(2px)}to{opacity:1;transform:none;filter:none}}
+
+#footballRescue{position:absolute;left:50%;bottom:calc(var(--sab) + 22px);z-index:60;transform:translateX(-50%);display:none}
+#footballRescue.show{display:block}
+#footballRescue button{font-size:.78rem;padding:.48em .8em;opacity:.82}
+
+.missionPulse{animation:missionPulse .7s ease-out}
+@keyframes missionPulse{0%{filter:brightness(1)}35%{filter:brightness(2.2) drop-shadow(0 0 18px #64E6DA)}100%{filter:brightness(1)}}
+
 </style>
 </head>
 <body>
 <div id="app">
-  <canvas id="fx"></canvas><canvas id="ambfx"></canvas>
+  <canvas id="fx"></canvas>
+<div id="timewarp"><div class="warpStreaks"></div><div class="warpRing"></div><div class="warpCore"></div></div>
+<div id="shockwave"></div><div id="webCurtain" class="webCurtain"></div>
+<canvas id="ambfx"></canvas>
 <div id="lensfx"></div><div id="cameraGlow"></div><div id="speedFx"></div><div id="portalFx"></div><div id="cinebars" class="cinebars"></div>
 <div id="heroWeb" class="heroWeb"></div>
 <div id="heroGuide" aria-hidden="true"></div></div>
@@ -630,7 +685,7 @@ mix-blend-mode:screen;animation:lensdrift 8s ease-in-out infinite alternate}
     <div class="shout" id="shout">GOAL!</div>
     <div class="scoreboard">Shot <b id="shotNo">1</b>/5 · Goals <b id="goals">0</b></div>
     <div class="prompt" id="prompt">Tap to aim</div>
-    <div id="tapzone"></div>
+    <div id="tapzone"></div><div id="footballRescue"><button class="btn">Continue match →</button></div>
     <div class="bubble" id="b3" style="top:9%"></div>
     <div class="next-wrap" id="n3"><button class="btn pulse">What's next? →</button></div>
     <div class="vig"></div>
@@ -1023,39 +1078,36 @@ function refreshVoices(){
 if("speechSynthesis" in window){refreshVoices(); speechSynthesis.onvoiceschanged=refreshVoices;}
 // speak phrase by phrase, and tell the caller when it has actually finished
 let speakSeq=0, resumeTick=null;
-function say(t,done){
-  if(!voiceOn||!soundOn||!("speechSynthesis" in window)){ if(done)done(); return; }
-  const seq=++speakSeq;
-  let guard=null, fired=false;
-  const finish=()=>{ if(fired||seq!==speakSeq)return; fired=true;
-    clearInterval(resumeTick); clearTimeout(guard); if(done)done(); };
+function speechParts(t){
+  return String(t).replace(/[—·]/g,",").replace(/…/g,"...")
+    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu,"")
+    .match(/[^.!?]+[.!?]?/g)?.map(x=>x.trim()).filter(Boolean)||[String(t)];
+}
+function speakPart(part,done){
+  if(!voiceOn||!soundOn||!("speechSynthesis" in window)){setTimeout(done,Math.max(650,part.split(/\s+/).length*155));return;}
   try{
-    speechSynthesis.cancel();
-    const clean=String(t).replace(/[—·]/g,",").replace(/…/g,"...")
-      .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu,"");
-    const parts=clean.split(/(?<=[.!?,])\s+/).map(x=>x.trim()).filter(Boolean);
-    if(!parts.length){ finish(); return; }
-    let i=0;
-    // Safari stops speaking after a while unless it is nudged
-    clearInterval(resumeTick);
-    resumeTick=setInterval(()=>{ try{ if(speechSynthesis.speaking)speechSynthesis.resume(); }catch(e){} },4000);
-    const next=()=>{
-      if(seq!==speakSeq)return;
-      if(i>=parts.length){ setTimeout(finish,180); return; }
-      const p=parts[i++];
-      const u=new SpeechSynthesisUtterance(p);
-      if(voice)u.voice=voice;
-      const punchy=/[!?]$/.test(p);
-      u.rate=punchy?.92:.84; u.pitch=punchy?.88:.82; u.volume=1;
-      u.onend=()=>setTimeout(next,150);
-      u.onerror=()=>setTimeout(next,150);
-      speechSynthesis.speak(u);
-    };
-    // if onend never fires (it happens on iOS) fall back to an estimate
-    const words=clean.split(/\s+/).length;
-    guard=setTimeout(finish,2000+words*430);
-    next();
-  }catch(e){ finish(); }
+    const u=new SpeechSynthesisUtterance(part);
+    if(voice)u.voice=voice;
+    u.rate=/[!?]$/.test(part)?.91:.83; u.pitch=.81; u.volume=1;
+    let fired=false;
+    const finish=()=>{if(fired)return;fired=true;clearTimeout(guard);done();};
+    const guard=setTimeout(finish,1600+part.split(/\s+/).length*420);
+    u.onend=()=>setTimeout(finish,100);u.onerror=finish;
+    speechSynthesis.speak(u);
+  }catch(e){done();}
+}
+function say(t,done,onPart){
+  ++speakSeq;
+  const seq=speakSeq;
+  try{speechSynthesis.cancel();}catch(e){}
+  const parts=speechParts(t); let i=0;
+  const next=()=>{
+    if(seq!==speakSeq)return;
+    if(i>=parts.length){if(done)done();return;}
+    const p=parts[i++]; if(onPart)onPart(p,i,parts.length);
+    speakPart(p,()=>setTimeout(next,90));
+  };
+  next();
 }
 
 
@@ -1114,16 +1166,20 @@ function heroDialogue(){
 }
 function bubble(el,text,o={}){
   clearInterval(typer);
-  el.classList.add("show");
-  el.textContent=text;
+  el.classList.add("show","syncing");
   heroDialogue();
-  const words=String(text).trim().split(/\s+/).length;
-  const fallback=Math.max(1800,Math.min(10500,700+words*365));
-  let done=false,guard=null;
-  const finish=()=>{if(done)return;done=true;clearTimeout(guard); if(o.then)setTimeout(o.then,o.wait||420);};
+  const parts=speechParts(text);
+  let done=false;
+  const finish=()=>{if(done)return;done=true;el.classList.remove("syncing");if(o.then)setTimeout(o.then,o.wait||350);};
   if(voiceOn&&soundOn&&("speechSynthesis" in window)){
-    guard=setTimeout(finish,fallback+1400); say(text,finish);
-  }else guard=setTimeout(finish,Math.max(1500,Math.min(5200,650+words*190)));
+    say(text,finish,(part)=>{
+      el.innerHTML=`<span class="spoken">${part}</span>`;
+      heroDialogue();
+    });
+  }else{
+    el.textContent=text;
+    setTimeout(finish,Math.max(1500,Math.min(6200,600+String(text).split(/\s+/).length*180)));
+  }
 }
 const hide=el=>el.classList.remove("show");
 function storyBeat(eye,main,sub,done,dur=3000){
@@ -1131,18 +1187,18 @@ function storyBeat(eye,main,sub,done,dur=3000){
   const words=String(sub).split(/\s+/).length;
   const hold=voiceOn?Math.max(dur,1400+words*330):dur;
   c.classList.add("on"); $("#cinebars").classList.add("on"); heroExit(); portalTransition(); scoreBed(/RESTORED|RECOVERED|VERIFIED/.test(eye)?"victory":"mystery",Math.max(4,hold/1000)); flash(); tone(72,1.8,.06,0,"sawtooth",42); noise(1.5,.025,"lowpass",280,.8);
-  if(voiceOn)setTimeout(()=>say(sub),260);
+  if(voiceOn)setTimeout(()=>say(sub,null,(part)=>{$("#storySub").textContent=part;}),260);
   setTimeout(()=>{c.classList.remove("on"); $("#cinebars").classList.remove("on"); setTimeout(()=>done&&done(),260);},hold);
 }
 
 /* ================= scenes ================= */
 const IDS=["s0","s1","s2","sfly","s3","s4","s5","s6"]; let cur="s0"; const enter={};
 seedAmbient(); requestAnimationFrame(ambientLoop);
-function go(id,title){
+function go(id,title){ stopHeroRoam(); webCurtainFX(); if(id==="s2"||id==="sfly"||id==="s3")warpFX();
   const w=$("#wipe"); $("#wipeTxt").textContent=title||"";
   w.classList.remove("go"); void w.offsetWidth; w.classList.add("go");
   if("speechSynthesis" in window)speechSynthesis.cancel();
-  setTimeout(()=>{ IDS.forEach(x=>$("#"+x).classList.toggle("on",x===id)); cur=id; if(enter[id])enter[id](); },420);
+  setTimeout(()=>{ IDS.forEach(x=>$("#"+x).classList.toggle("on",x===id)); cur=id; if(enter[id])enter[id](); setTimeout(scheduleHeroRoam,1800); },420);
 }
 function nb(id,fn){$("#"+id).querySelector("button").addEventListener("click",()=>{sfx.ui();buzz(10);$("#"+id).classList.remove("show");fn();});}
 
@@ -1152,7 +1208,7 @@ function setMission(count,status){
   fragmentCount=Math.max(0,Math.min(3,Number(count)||0));
   const countEl=$("#mhCount"), statusEl=$("#mhStatus");
   if(countEl) countEl.textContent=fragmentCount+" / 3";
-  if(statusEl) statusEl.textContent=status||"MISSION ACTIVE";
+  if(statusEl) statusEl.textContent=status||"MISSION ACTIVE"; const hud=$("#missionHud");if(hud){hud.classList.remove("missionPulse");void hud.offsetWidth;hud.classList.add("missionPulse");}
   for(let i=1;i<=3;i++){
     const el=$("#sh"+i);
     if(el) el.classList.toggle("on",i<=fragmentCount);
@@ -1200,6 +1256,34 @@ function portalTransition(){
   const cx=innerWidth*.5,cy=innerHeight*.48;
   burst(cx,cy,34,8,["#64E6DA","#4E7DF5","#FFF6E6"]);
   setTimeout(()=>burst(cx,cy,22,6,["#FFC93C","#E01F26","#FFF6E6"]),160);
+}
+
+function warpFX(){
+  const w=$("#timewarp"); if(!w)return;
+  w.classList.remove("on");void w.offsetWidth;w.classList.add("on");
+  try{sfx.whoosh();}catch(e){}
+  setTimeout(()=>{w.classList.remove("on");},1600);
+}
+function shockFX(){
+  const q=$("#shockwave");q.classList.remove("go");void q.offsetWidth;q.classList.add("go");
+  setTimeout(()=>q.classList.remove("go"),1050);
+}
+function webCurtainFX(){
+  const w=$("#webCurtain");w.classList.remove("go");void w.offsetWidth;w.classList.add("go");
+  setTimeout(()=>w.classList.remove("go"),950);
+}
+let heroRoamTimer=null;
+function stopHeroRoam(){clearTimeout(heroRoamTimer);}
+function heroFlyby(){
+  if(!["s1","s2","sfly","s3","s4","s5"].includes(cur))return;
+  const h=$("#heroGuide");if(!h)return;
+  h.classList.remove("exit","swinging","perched");h.classList.add("on","flyby");
+  webSnap(); setTimeout(()=>{h.classList.remove("flyby");heroPlace(cur==="s3"?"left":"right");},1450);
+}
+function scheduleHeroRoam(){
+  stopHeroRoam();
+  if(!["s1","s2","sfly","s3","s4","s5"].includes(cur))return;
+  heroRoamTimer=setTimeout(()=>{heroFlyby();scheduleHeroRoam();},5200+Math.random()*3600);
 }
 
 
@@ -1344,9 +1428,9 @@ enter.s2=()=>{ setTimeout(()=>heroSwing("topright"),520);
   setTimeout(()=>{d.classList.add("here"); $("#s2").classList.add("close"); heroPlace("lowright"); webSnap();},12900*V);
   setTimeout(()=>{sfx.stomp();shake();buzz(32);},14600*V);
   setTimeout(()=>{sfx.stomp();shake();buzz(32);},16000*V);
-  setTimeout(()=>{d.classList.add("roar");sfx.roar();shake(true);flash(true);buzz([60,80,120]);quip("Okay. THAT is a dinosaur.",1500);
+  setTimeout(()=>{d.classList.add("roar");$("#s2").classList.add("trexImpact");shockFX();sfx.roar();shake(true);flash(true);buzz([60,80,120]);quip("Okay. THAT is a dinosaur.",1500);
     burst(W*.55,H*.4,40,9,["#8CE04A","#FFF6E6","#FFC93C"]);},17300*V);
-  setTimeout(()=>d.classList.remove("roar"),19200*V);
+  setTimeout(()=>{d.classList.remove("roar");$("#s2").classList.remove("trexImpact");},19200*V);
   setTimeout(()=>{d.classList.add("hat-on");sfx.chime();
     bubble(b2,`Wait... the fragment is in his party hat. He is not attacking — he is guarding it. Fragment one recovered. And apparently we have invited a T-Rex to your birthday.`,
       {then:()=>$("#n2").classList.add("show"),wait:400});},19500*V);
@@ -1524,7 +1608,7 @@ function flyWin(){
 nb("nf",()=>{hide($("#bf"));cancelAnimationFrame(F.raf);setMission(2,"FRAGMENT 02 SECURED");storyBeat("FRAGMENT 02 // RECOVERED","RETURNING <em>HOME</em>","One final temporal lock remains. It has built itself from Reuben’s strongest signal: football.",()=>go("s3","Chapter 4 · The final lock"),3200);});
 
 /* ---- 3: penalties with aim + power ---- */
-const G={state:"idle",shot:0,goals:0,aimX:0,dir:1,power:0,pdir:1,raf:null,speed:1};
+const G={state:"idle",shot:0,goals:0,aimX:0,dir:1,power:0,pdir:1,raf:null,speed:1,watch:null,last:0};
 enter.s3=()=>{ setTimeout(()=>heroSwing("left"),450);
   Object.assign(G,{state:"idle",shot:0,goals:0,aimX:.5,dir:1,power:0,pdir:1,speed:1});
   $("#shotNo").textContent="1"; $("#goals").textContent="0";
@@ -1538,12 +1622,16 @@ enter.s3=()=>{ setTimeout(()=>heroSwing("left"),450);
 };
 function goalBox(){const r=$(".goal").getBoundingClientRect();return r;}
 function beginShot(){
-  if(G.shot>=5){return endGame();}
+  clearTimeout(G.watch);
+  cancelAnimationFrame(G.raf);
+  if(G.shot>=5){endGame();return;}
+  $("#footballRescue").classList.remove("show");
   $("#shotNo").textContent=(G.shot+1);
-  G.state="aim"; G.power=0; G.pdir=1; G.speed=1+G.shot*.22;
-  $("#prompt").textContent="Tap to aim"; $("#prompt").style.display="block";
+  G.state="aim"; G.power=0; G.pdir=1; G.speed=1+G.shot*.18; G.last=performance.now();
+  $("#prompt").textContent="Tap to lock your aim"; $("#prompt").style.display="block";
   $("#reticle").className="on"; $("#powerbox").className="powerbox";
-  cancelAnimationFrame(G.raf); G.raf=requestAnimationFrame(anim);
+  G.raf=requestAnimationFrame(anim);
+  G.watch=setTimeout(()=>{$("#footballRescue").classList.add("show");},9000);
 }
 function anim(){
   const gb=goalBox();
@@ -1560,15 +1648,25 @@ function anim(){
   }
   G.raf=requestAnimationFrame(anim);
 }
-$("#tapzone").addEventListener("click",()=>{
+function footballInput(e){
+  if(e){e.preventDefault();e.stopPropagation();}
+  clearTimeout(G.watch);$("#footballRescue").classList.remove("show");
   if(G.state==="aim"){
-    G.state="power"; $("#reticle").className="on locked"; $("#powerbox").className="powerbox on";
-    $("#prompt").textContent="Tap for power!"; tone(900,.09,.07,0,"square"); buzz(12);
+    G.state="power"; G.last=performance.now();
+    $("#reticle").className="on locked"; $("#powerbox").className="powerbox on";
+    $("#prompt").textContent="Tap again for power"; tone(900,.09,.07,0,"square"); buzz(12);
+    G.watch=setTimeout(()=>{$("#footballRescue").classList.add("show");},9000);
   } else if(G.state==="power"){
     G.state="shot"; cancelAnimationFrame(G.raf); takeShot();
   }
+}
+$("#tapzone").addEventListener("pointerdown",footballInput,{passive:false});
+$("#footballRescue button").addEventListener("pointerdown",(e)=>{
+  e.preventDefault();e.stopPropagation();$("#footballRescue").classList.remove("show");
+  if(G.state==="aim"||G.state==="power")footballInput();
+  else if(G.state!=="shot"&&G.state!=="done")beginShot();
 });
-function takeShot(){
+function takeShot(){ clearTimeout(G.watch); G.watch=setTimeout(()=>{if(G.state==="shot"){G.shot++;$("#ball").className="idle";$("#ball").style.transform="";$("#keeper").style.transform="translate(-50%,0)";beginShot();}},4200);
   const gb=goalBox(), ball=$("#ball"), keeper=$("#keeper"), net=$("#net");
   $("#prompt").style.display="none"; $("#reticle").className=""; $("#powerbox").className="powerbox";
   sfx.kick(); buzz(22);
@@ -1599,7 +1697,7 @@ function takeShot(){
       sh.textContent=over?"OVER THE BAR!":(weak?"TOO SOFT!":"SAVED!");
       sh.classList.add("on","miss"); over?sfx.aw():sfx.save(); buzz(40);
     }
-    G.shot++;
+    G.shot++; clearTimeout(G.watch);
     setTimeout(()=>{
       ball.className="idle"; ball.style.transform="";
       keeper.style.transform="translate(-50%,0)";
@@ -1608,7 +1706,7 @@ function takeShot(){
   },640);
 }
 function endGame(){
-  G.state="done"; $("#prompt").style.display="none";
+  clearTimeout(G.watch);cancelAnimationFrame(G.raf);$("#footballRescue").classList.remove("show");G.state="done"; $("#prompt").style.display="none";
   const g=G.goals;
   const line = g>=5 ? `FIVE OUT OF FIVE. ${NAME.toUpperCase()}, that is a world record.`
              : g>=3 ? `${g} out of 5. Identity confirmed. The final fragment is unlocking...`
@@ -1758,7 +1856,7 @@ $("#s5").addEventListener("click",e=>{
 nb("n5",()=>{setMission(3,"CORE 100% · RESTORED");storyBeat("TEMPORAL CORE // 100%","TIMELINE <em>RESTORED</em>","Dinosaurs: survived. Cake: recovered. Football lock: broken. Birthday: saved.",()=>go("s6","MISSION COMPLETE"),3200);});
 
 /* ---- 6: finale ---- */
-enter.s6=()=>{ $("#missionHUD").classList.add("hide"); setTimeout(()=>heroSwing("topright"),260);
+enter.s6=()=>{ stopHeroRoam(); setTimeout(()=>heroSwing("topright"),250); setTimeout(()=>heroFlyby(),1600); setTimeout(()=>shockFX(),2400); $("#missionHUD").classList.add("hide"); setTimeout(()=>heroSwing("topright"),260);
   const by=$("#swingBy2"); by.classList.remove("go"); void by.offsetWidth;
   setTimeout(()=>{by.classList.add("go");sfx.thwip();},400);
   sfx.fanfare(); rain(170); burst(innerWidth*.5,innerHeight*.42,74,11); buzz([30,50,30,50,70]);
